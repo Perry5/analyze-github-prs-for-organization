@@ -18,32 +18,34 @@ cp .env.example .env
 ```
 npm start
 ```
-- Using Curl, Postman or your favorite tool, make a POST request to: 
+- Using Curl, Postman or your favorite tool, make a GET request to: 
 ```
 localhost:8080/prs
 ```
 make sure you watch the sever logs 
 
 ### Environment Variables
-Default URL for the GitHub REST API v3
 ##### `GITHUB_BASE_URL` Default: `https://api.github.com/`
+- Default URL for the GitHub REST API v3
 
-GitHub Organization to query
 ##### `ORGANIZATION` Default: `ramda`
+- GitHub Organization to query
 
-Requests that return multiple items will be paginated to 30 items by default.
-We can set a custom page size up to 100. 
 ##### `PER_PAGE_LIMIT` Default: `30`
+- Requests that return multiple items will be paginated to 30 items by default.
+We can set a custom page size up to 100. 
 
-NOTE: If you enter any value < 30 it will default to 30 (min) and if you enter any value > 100 it will default to 100 (max)
+- NOTE: If you enter any value < 30 it will default to 30 (min) and if you enter any value > 100 it will default to 100 (max)
 
-`PER_PAGE_LIMIT = 30` - Takes an average of *54* seconds to retrieve all the PRs from all the repos
-`PER_PAGE_LIMIT = 100` - Takes an average of *40* seconds to retrieve all the PRs from all the repos
+Higher per-page limits seem to run a bit faster. On my machine:
+-  `PER_PAGE_LIMIT = 30` - Takes an average of *54* seconds to retrieve all the PRs from all the repos
+- `PER_PAGE_LIMIT = 100` - Takes an average of *44* seconds to retrieve all the PRs from all the repos
 
-Registered GitHub application Client Secret and ID used in this case to increasing the unauthenticated rate limit.
-If specified, it allows requests up to 5000 per hour. If not specified, requests are limited to 60 per hour. 
 ##### `CLIENT_SECRET`
 ##### `CLIENT_ID`
+- Registered GitHub application Client Secret and ID used in this case to increasing the unauthenticated rate limit.
+If specified, it allows requests up to 5000 per hour. If not specified, requests are limited to 60 per hour. 
+
 
 ### Total # of pull requests retrieved: 1830
 
