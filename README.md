@@ -1,4 +1,4 @@
-# Redox Coding Assessment
+# Redox Coding Task
 
 # Getting started
 - Clone the repository
@@ -7,7 +7,7 @@ git clone git@github.com:Perry5/redox-task.git
 ```
 - Install dependencies
 ```
-cd redox-assessment
+cd redox-task
 npm install
 ```
 - Set environment (vars):
