@@ -27,6 +27,10 @@ localhost:8080/prs
 ```
 make sure you watch the sever logs 
 
+## HTTP Response
+Request made using Postman
+![logging_image](public/response.png)
+
 ### Environment Variables
 ##### `GITHUB_BASE_URL` Default: `https://api.github.com/`
 - Default URL for the GitHub REST API v3
