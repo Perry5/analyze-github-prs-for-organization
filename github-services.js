@@ -86,6 +86,40 @@ class GitHubService {
         console.log(`Returning list of repos...total is: ${repos.length}\n`);
         return repos;
     }
+
+    /**
+     * Get the list of all merged PR's from the given list of PR's
+     * @param {array} pullRequests - List of PR's from which to get merged ones
+     * @returns {array} mergedPrs - List of Merged Pull requests
+     */
+    getAllMergedPrs(pullRequests) {
+        const mergedPrs = [];
+        pullRequests.forEach((pr) => {
+            if (pr.state === 'closed' && pr.merged_at !== null) {
+                mergedPrs.push(pr);
+            }
+        });
+        return mergedPrs;
+    }
+
+    /**
+     * Get a list of all the PR's that were merged week over week
+     * @param {array} mergedPrs - array of merged PRs
+     * @return {map} wowMerge - A mapping of all the week (as keys) and merged PR's (as values)
+     */
+    getWeekOverWeekMerges(mergedPrs) {
+        const wowMerges = {};
+
+        mergedPrs.forEach((mpr) => {
+            const weekRange = utilService.generateDateKeys(mpr.merged_at);
+            if (wowMerges.hasOwnProperty(weekRange)) {
+                wowMerges[weekRange].push(mpr)
+            } else {
+                wowMerges[weekRange] = [mpr];
+            }
+        });
+        return wowMerges;
+    }
 }
 
 module.exports = GitHubService;

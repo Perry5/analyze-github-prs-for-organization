@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const moment = require('moment');
 const config = require('./config');
 
 const clientSecret = config.gitHub.clientSecret;
@@ -50,4 +51,13 @@ async function makeFetchRequest(endPoint, method) {
     return { response, resJson };
 }
 
-module.exports = { extractUrlFromLinkHeader, makeFetchRequest };
+function generateDateKeys(date) {
+    const dateInMoment = moment(date);
+    const startOfWeek = moment(dateInMoment.toISOString()).startOf('week');
+    const endOfWeek = moment(dateInMoment.toISOString()).endOf('week');
+
+    return `${startOfWeek.format('ll')} - ${endOfWeek.format('ll')}`;
+}
+
+
+module.exports = { extractUrlFromLinkHeader, makeFetchRequest, generateDateKeys };

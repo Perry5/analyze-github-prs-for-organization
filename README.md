@@ -1,4 +1,7 @@
-# Redox Coding Task
+# Analyzing GitHub Pull requests for an organization
+A simple node application that interacts with the GitHub Rest API. It retrieves all the Pull requests from 
+all the repositories for a particular organization (specified in the .env file). Then groups the PR's into
+week over week merges etc.  
 
 # Getting started
 - Clone the repository
@@ -53,25 +56,3 @@ If specified, it allows requests up to 5000 per hour. If not specified, requests
 Simple console.log() is used for displaying output on the server. In order to get a sense of what is happening with the server, we log some outputs to the console.
 In a real environment, a logging tool like winston will be used.
 ![logging_image](public/logging.png)
-
-
-# Task
-For the coding task, we'll build a tool to analyze pull request traffic for a Github organization.
-
-For the part you do on your own: write some code that will retrieve all pull requests for the Ramda organization using the Github web API and store the results in memory. When we pair, we will use this collection of pull requests to answer questions like "how many pull requests were merged week over week across the organization?" (as a simple example).
-
-Do not use a pre-existing Github library. We want to see you interact directly with the Github API. Other than that, use whatever tools (language, frameworks, etc) you like, structure your code however you like, etc. We care much more about how you solve technical problems generally than any specific knowledge and we want to see you at your best.
-
-### Here are some resources: 
-- Ramda organization: https://github.com/ramda
-- Github API docs: https://developer.github.com/v3/  
-- If you want, feel free to use the new GraphQL API instead of the v3 REST API: https://developer.github.com/v4/  
-
-Please complete the task by one week from today (though let us know now if you'll need more time and it's likely we can accommodate you!). 
-
-When you complete the take-home task, please:
-- Let us know how many pull requests your project retrieves
-- Push your project to your Github account and send us a link to the repo - or if you'd rather not have it on your Github account, a link to Dropbox or an emailed zip file is fine, too
-- If you use a framework that generates boilerplate code, let us know which parts of the project to focus on
-
-Once we get a chance to review the project, we will be in touch about next steps. If you have any questions, please let me know and good luck!
