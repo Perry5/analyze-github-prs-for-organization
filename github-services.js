@@ -120,6 +120,81 @@ class GitHubService {
         });
         return wowMerges;
     }
+
+    /************************* CLASS FUNCTIONS THAT ARE CURRENTLY NOT BEING CALLED FROM THE API **********************/
+    getAllPrsByDate(openDate, pullRequests) {
+        const prsByDate = [];
+        // using moment(string, format) allows us pass in dates in different formats
+        const prOpenDate = moment.utc(openDate, ['MM-DD-YYYY", "YYYY-MM-DD']);
+        pullRequests.forEach((pr) => {
+            // To limit granularity to a unit other than millisecond, we can pass in a second parameter
+            // Passing in month will check month and year. Passing in day will check day, month, and year
+            if (moment.utc(pr.created_at).isSame(prOpenDate, 'day')) {
+                prsByDate.push(pr);
+            }
+        });
+
+        console.log(`Returning all (${prsByDate.length}) PR's Opened on: ${prOpenDate}`);
+        return prsByDate;
+    }
+
+    getAllMergedPrsByDate(date, prs) {
+        const mergedPrsByDate = [];
+        const prMergeDate = moment.utc(date, ['MM-DD-YYYY", "YYYY-MM-DD']);
+
+        prs.forEach((pr) => {
+            if ((pr.merged_at !== null) && (moment.utc(pr.merged_at).isSame(prMergeDate, 'month'))) {
+                mergedPrsByDate.push(pr);
+            }
+        });
+        return mergedPrsByDate;
+    }
+
+    async getPrsByUser(userId, prs) {
+        const prsByUser = [];
+        prs.forEach((pr) => {
+            if (parseInt(pr.user.id) === parseInt(userId)) {
+                prsByUser.push(pr);
+            }
+        });
+        console.log(`Returning PRs By User List: ${ prsByUser.length } ...\n`);
+        return prsByUser;
+    }
+
+    async getMergedPrsByUser(userId, prs) {
+        const mergedPrs = await this.getAllMergedPrs(prs);
+        console.log(`Returning Merged PR's by User ...`);
+        return await this.getPrsByUser(userId, mergedPrs);
+    }
+
+    getAllPrsByMonthYear(prs, year, month) {
+        // NOTE, months in moment are zero indexed. January is 0 and December is 11
+        const prsInGivenMonth = [];
+        const prMonth = moment([year, month]);
+
+        prs.forEach((pr) => {
+            const prCreatedDate = moment.utc(pr.created_at);
+            if (prMonth.diff(prCreatedDate, 'months') === 0) {
+                prsInGivenMonth.push(pr);
+            }
+        });
+        return prsInGivenMonth;
+    }
+
+    async getCommitsForPr(pr) {
+        const commitUrl = pr.commits_url;
+        return await utilService.makeFetchRequest(commitUrl, 'GET');
+    }
+
+    async getCommitsForAllPrs(prs) {
+        const allCommits = [];
+        for (const pr of prs) {
+            const commits = await this.getCommitsForPr(pr);
+            allCommits.push.apply(allCommits, commits);
+        }
+        return allCommits;
+    }
+
 }
 
 module.exports = GitHubService;
