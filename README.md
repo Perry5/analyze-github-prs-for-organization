@@ -6,11 +6,11 @@ week over week merges etc.
 # Getting started
 - Clone the repository
 ```
-git clone git@github.com:Perry5/redox-task.git
+git clone git@github.com:Perry5/https://github.com/Perry5/analyze-github-prs-for-organization.git
 ```
 - Install dependencies
 ```
-cd redox-task
+cd analyze-github-prs-for-organization
 npm install
 ```
 - Set environment (vars):
