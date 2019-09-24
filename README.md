@@ -3,6 +3,8 @@ A simple node application that interacts with the GitHub Rest API. It retrieves 
 all the repositories for a particular organization (specified in the .env file). Then groups the PR's into
 week over week merges etc.  
 
+This shows an example of how to use `async / await` in a `for loop`. Shows example of how you might structure a node application. 
+
 # Getting started
 - Clone the repository
 ```
