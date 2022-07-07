@@ -10,7 +10,7 @@
     "dotenv": "^8.0.0",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "morgan": "^1.9.1",
     "node-fetch": "^2.6.0",
     "request": "^2.88.0"
